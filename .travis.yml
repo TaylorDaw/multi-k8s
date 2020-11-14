@@ -1,3 +1,4 @@
+language: node
 sudo: required
 
 services:
@@ -7,7 +8,7 @@ before_install:
   - docker build -t taylordaw/fib-client -f ./client/Dockerfile.dev ./client
 
 script:
-  - docker run taylordaw/fib-client yarn test -- --coverage
+  - docker run -e CI=true taylordaw/fib-client yarn test --coverage
 
 after_success:
   - docker build -t taylordaw/multi-nginx ./nginx
