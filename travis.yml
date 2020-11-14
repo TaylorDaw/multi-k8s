@@ -1,0 +1,21 @@
+sudo: required
+
+services:
+  - docker
+
+before_install:
+  - docker build -t taylordaw/fib-client -f ./client/Dockerfile.dev ./client
+
+script:
+  - docker run taylordaw/fib-client yarn test -- --coverage
+
+after_success:
+  - docker build -t taylordaw/multi-nginx ./nginx
+  - docker build -t taylordaw/multi-fib-client ./client
+  - docker build -t taylordaw/multi-fib-server ./server
+  - docker build -t taylordaw/multi-fib-worker ./worker
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USER" --password-stdin
+  - docker push taylordaw/multi-nginx
+  - docker push taylordaw/multi-fib-client
+  - docker push taylordaw/multi-fib-server
+  - docker push taylordaw/multi-fib-worker
