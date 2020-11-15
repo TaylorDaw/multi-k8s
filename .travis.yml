@@ -11,12 +11,12 @@ script:
   - docker run -e CI=true "$DOCKER_USER"/fib-client yarn test --coverage
 
 after_success:
-  - docker build -t "$DOCKER_USER"/multi-nginx ./nginx
+  - docker build -t "$DOCKER_USER"/multi-fib-nginx ./nginx
   - docker build -t "$DOCKER_USER"/multi-fib-client ./client
   - docker build -t "$DOCKER_USER"/multi-fib-server ./server
   - docker build -t "$DOCKER_USER"/multi-fib-worker ./worker
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USER" --password-stdin
-  - docker push "$DOCKER_USER"/multi-nginx
+  - docker push "$DOCKER_USER"/multi-fib-nginx
   - docker push "$DOCKER_USER"/multi-fib-client
   - docker push "$DOCKER_USER"/multi-fib-server
   - docker push "$DOCKER_USER"/multi-fib-worker
