@@ -20,3 +20,15 @@ after_success:
   - docker push "$DOCKER_USER"/multi-fib-client
   - docker push "$DOCKER_USER"/multi-fib-server
   - docker push "$DOCKER_USER"/multi-fib-worker
+
+deploy:
+  provider: elasticbeanstalk
+  region: 'us-west-1'
+  app: 'multi-fib'
+  env: 'MultiFib-env'
+  bucket_name: 'elasticbeanstalk-us-west-1-475377943130'
+  bucket_path: 'multi-fib'
+  on:
+    branch: main
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key: $AWS_SECRET_KEY
