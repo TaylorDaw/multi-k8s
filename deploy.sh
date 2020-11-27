@@ -12,5 +12,5 @@ docker push taylordaw61/multi-k8s-worker:$SHA
 kubectl apply -f k8s
 
 kubectl set image deployments/server-deployment api=taylordaw61/multi-k8s-server
-kubectl set image deployments/client-deployment api=taylordaw61/multi-k8s-client
-kubectl set image deployments/worker-deployment api=taylordaw61/multi-k8s-worker
+kubectl set image deployments/client-deployment client=taylordaw61/multi-k8s-client
+kubectl set image deployments/worker-deployment worker=taylordaw61/multi-k8s-worker
