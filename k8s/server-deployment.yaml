@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: api
-          image: stephengrider/multi-server
+          image: taylordaw61/multi-k8s-server
           ports:
             - containerPort: 5000
           env:
