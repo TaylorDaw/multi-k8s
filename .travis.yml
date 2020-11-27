@@ -21,6 +21,7 @@ script:
   - docker run -e CI=true taylordaw61/multi-k8s-client-test yarn test
 
 deploy:
+  skip_cleanup: true
   provider: script
   script: bash ./deploy.sh
   on:
